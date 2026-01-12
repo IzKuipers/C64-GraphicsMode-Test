@@ -1,0 +1,61 @@
+sections
+0880 - 0ad2 : DATA, code
+0ad2 - 0b38 : DATA, data
+0b38 - 0b38 : BSS, bss
+0b38 - 9000 : HEAP, heap
+9000 - a000 : STACK, stack
+00f7 - 00f7 : ZEROPAGE, zeropage
+0801 - 0853 : DATA, startup
+a000 - a000 : SSTACK, sstack
+a000 - a000 : SSTACK, mmap_trampoline@stack
+a000 - a000 : SSTACK, memset@stack
+a000 - a000 : SSTACK, vic_setmode@stack
+a000 - a000 : SSTACK, set@stack
+a000 - a000 : SSTACK, draw_hline@stack
+a000 - a000 : SSTACK, draw_vline@stack
+a000 - a000 : SSTACK, main@stack
+
+regions
+00f7 - 00ff : 0000, 0000, zeropage
+0801 - 0880 : 0853, 0052, startup
+0880 - 9000 : 0b38, 02b8, main
+
+objects
+00f7 - 00f7 : ZeroStart, START:zeropage
+00f7 - 00f7 : ZeroEnd, END:zeropage
+0801 - 0853 : startup, NATIVE_CODE:startup
+0880 - 0937 : main, NATIVE_CODE:code
+0937 - 094c : mmap_trampoline, NATIVE_CODE:code
+094c - 0963 : NMITrampoline, NATIVE_CODE:code
+0963 - 096a : DoneTrampoline, NATIVE_CODE:code
+096a - 0981 : IRQTrampoline, NATIVE_CODE:code
+0981 - 09a5 : memset, NATIVE_CODE:code
+09a5 - 09f7 : vic_setmode, NATIVE_CODE:code
+09f7 - 0a3b : draw_hline, NATIVE_CODE:code
+0a3b - 0a8e : set, NATIVE_CODE:code
+0a8e - 0ad2 : draw_vline, NATIVE_CODE:code
+0ad2 - 0ad3 : spentry, DATA:data
+0b00 - 0b38 : bitshift, DATA:data
+0b38 - 0b38 : BSSEnd, END:bss
+0b38 - 0b38 : BSSStart, START:bss
+a000 - a000 : StackEnd, END:stack
+
+objects by size
+0880 (00b7) : main, NATIVE_CODE:code
+0a3b (0053) : set, NATIVE_CODE:code
+0801 (0052) : startup, NATIVE_CODE:startup
+09a5 (0052) : vic_setmode, NATIVE_CODE:code
+09f7 (0044) : draw_hline, NATIVE_CODE:code
+0a8e (0044) : draw_vline, NATIVE_CODE:code
+0b00 (0038) : bitshift, DATA:data
+0981 (0024) : memset, NATIVE_CODE:code
+094c (0017) : NMITrampoline, NATIVE_CODE:code
+096a (0017) : IRQTrampoline, NATIVE_CODE:code
+0937 (0015) : mmap_trampoline, NATIVE_CODE:code
+0963 (0007) : DoneTrampoline, NATIVE_CODE:code
+0ad2 (0001) : spentry, DATA:data
+00f7 (0000) : ZeroStart, START:zeropage
+00f7 (0000) : ZeroEnd, END:zeropage
+0b38 (0000) : BSSEnd, END:bss
+0b38 (0000) : BSSStart, START:bss
+a000 (0000) : StackEnd, END:stack
