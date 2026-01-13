@@ -14,3 +14,12 @@ void set(int x, int y)
 		*dp |= 0x80 >> (x & 7);
 	}
 }
+
+void clear(int x, int y)
+{
+	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
+	{
+		char* dp = Hires + 40 * 8 * (y >> 3) + (y & 7) + (x & ~7);
+		*dp &= ~(0x80 >> (x & 7));
+	}
+}

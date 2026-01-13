@@ -18,8 +18,10 @@ int main(void)
     draw_box(0, 0, SCREEN_WIDTH_ZB, SCREEN_HEIGHT_ZB, 0, screen_bounds);
 
     int body_bounds[4];
-    draw_window(30, 30, 140, 80, 5, body_bounds, "Errorg");
-    int end = gfx_print_in("An error occurred, and the\noperation couldn't be\ncompleted.", body_bounds);
+    draw_window_centered(140, 80, 5, body_bounds, "About");
+    int end = gfx_print_in("UI rendering test\nversion 1.0\n\n(c) Izaak Kuipers 2026", body_bounds);
+
+    // gfx_testprint();
 
     // Loop infinitely to prevent the program from stopping
     for(;;) {}

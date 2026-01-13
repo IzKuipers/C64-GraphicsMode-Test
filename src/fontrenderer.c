@@ -5,7 +5,7 @@ const unsigned MAX_CHAR_WIDTH = 5;
 const unsigned CHAR_HEIGHT = 8;
 const unsigned CHAR_SPACING = 1;
 
-const char* FontMap = "\xFFabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '\",.0123456789%@()[]{}:*";
+const char* FontMap = "\xFFabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '\",.0123456789%@()[]{}:?;#$=+-~/\\|><`";
 static const char FontData[] = {
 	#embed "../fonts/abc2-lowercase.bin"
 };

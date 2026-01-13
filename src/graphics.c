@@ -14,11 +14,22 @@ void draw_vline(int x, int y, int len) {
     }
 }
 
+void clear_area(int x, int y, int w, int h) {
+    int end_x = x + w;
+    int end_y = y + h;
+
+    for (int yy = y; yy <= end_y; yy++) {
+        for (int xx = x; xx <= end_x; xx++) {
+            clear(xx, yy);
+        }
+    }
+}
+
 void draw_box(int x, int y, int w, int h, int p, int *bounds) {
     draw_hline(x, y, w); // top
     draw_hline(x, y + h, w+1); // bottom
-    draw_vline(x, x, h); // left
-    draw_vline(x + w, x, h); // right
+    draw_vline(x, y, h); // left
+    draw_vline(x + w, y, h); // right
 
     // tlbr
     bounds[0] = y + p + 1; // top
@@ -40,7 +51,6 @@ void draw_window(int x, int y, int w, int h, int p, int *content_bounds, const c
     draw_box(x, y, w, titlebar_height, 2, title_bounds);
     draw_box(x, y + titlebar_height, w, h - titlebar_height, p, body_bounds);
     gfx_print_in(title, title_bounds);
-    gfx_print(x + w - 5 - 3, y + 3, "*");
 
     int debug[] = { x, y, w, h, p, sizeof(content_bounds), strlen(title) };
 
@@ -50,4 +60,11 @@ void draw_window(int x, int y, int w, int h, int p, int *content_bounds, const c
     content_bounds[1] = body_bounds[1];
     content_bounds[2] = body_bounds[2];
     content_bounds[3] = body_bounds[3];
+}
+
+void draw_window_centered(int w, int h, int p, int *content_bounds, const char* title) {
+    int x = int((SCREEN_WIDTH - w) / 2);
+    int y = int((SCREEN_HEIGHT - h) / 2);
+
+    draw_window(x, y, w, h, p, content_bounds, title);
 }
