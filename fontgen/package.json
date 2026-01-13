@@ -1,0 +1,10 @@
+{
+  "name": "c64-fontgen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "canvas": "^3.2.1"
+  }
+}
