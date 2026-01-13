@@ -15,6 +15,76 @@ void set(int x, int y)
 	}
 }
 
+const char* FontMap = "abcdefghijklmnopqrstuvwxyz";
+
+static const char FontData[] = {
+	#embed "./fonts/abc2-lowercase.bin"
+};
+
+int find_char_idx(int idx) {
+    int counter = idx;
+    int start = 0;
+
+    for (int i = 0; i < sizeof(FontData); i++) {
+        char byte = FontData[i];
+
+        if (byte == 0xFF) {
+            counter--;
+            start = i + 1;
+            continue;
+        }
+
+        if (counter == 0) break;
+    }
+
+    if (counter != 0) return -1;
+
+    return start;
+}
+
+int put_char(int idx, int x, int y) {
+    int start = find_char_idx(idx);
+    int width = 0;
+
+    if (start == -1) return 0;
+
+    for (int i=0;i<sizeof(FontData);i++) {
+        char byte = FontData[start + i];
+
+        if (byte == 0xFF) break;
+
+        width++;
+
+        int bit = 0;
+
+        while (bit < 8) {
+            if (byte & 0x01) {
+                set(x+i, y + (8 - bit));
+            }
+
+            bit++;
+            byte = byte >> 1;
+        }
+    }
+
+    return width;
+}
+
+int character_idx(char c) {
+    for (int i = 0; FontMap[i]; i++) {
+        if (FontMap[i] == c)
+            return i;
+    }
+    return -1;
+}
+
+void gfx_print(int x, int y, const char* sequence) {
+    for (int i = 0; i < strlen(sequence); i++) {
+        int width = put_char(character_idx(sequence[i]), x, y);
+        x += width + 1;
+    }
+}
+
 void draw_hline(int x, int y, int len) {
     for (int i=x;i<x+len;i++) {
         set(i, y);
@@ -38,11 +108,11 @@ int main(void)
 	vic.color_border = VCOL_WHITE;
 
     draw_hline(0, 0, 320);
-    draw_hline(0, 12, 320);
-
     draw_hline(0, 199, 320);
     draw_vline(0, 0, 200);
     draw_vline(319, 0, 200);
+    
+    gfx_print(2, 2, "abcdefghijklmnopqrstuvwxyz");
 
     for (;;){}
 
