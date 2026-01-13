@@ -5,7 +5,6 @@
 
 char * const Hires	= (char *)0xe000;
 char * const Screen	= (char *)0xd000;
-bool running = true;
 
 void set(int x, int y)
 {
@@ -116,9 +115,7 @@ int main(void)
     gfx_print(2, 2, "abcdefghijklmnopqrstuvwxyz");
 
     // Loop infinitely to prevent the program from stopping
-    while (running) {
-        //
-    }
+    for(;;) {}
 
 	return 0;
 }
