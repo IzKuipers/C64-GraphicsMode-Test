@@ -8,7 +8,7 @@ void debug_print(int input[], int s) {
 
         sprintf(dest, "%d, ", input[i]);
 
-        int bounds[4] = { 0, pos, SCREEN_HEIGHT, SCREEN_WIDTH};
+        int bounds[4] = { DEF_GFX_BOUNDS[0], pos, SCREEN_HEIGHT, SCREEN_WIDTH};
 
         pos += gfx_print_in(dest, bounds);
     }

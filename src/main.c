@@ -3,7 +3,6 @@
 #include <math.h>
 #include <string.h>
 #include "graphics.c"
-#include "util.c"
 
 int main(void)
 {
@@ -19,8 +18,8 @@ int main(void)
     draw_box(0, 0, SCREEN_WIDTH_ZB, SCREEN_HEIGHT_ZB, 0, screen_bounds);
 
     int body_bounds[4];
-    draw_window(30, 30, 140, 80, 5, body_bounds, "Error");
-    gfx_print_in("An error occurred, and the operation couldn't be completed.", body_bounds);
+    draw_window(30, 30, 140, 80, 5, body_bounds, "Errorg");
+    int end = gfx_print_in("An error occurred, and the\noperation couldn't be\ncompleted.", body_bounds);
 
     // Loop infinitely to prevent the program from stopping
     for(;;) {}

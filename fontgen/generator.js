@@ -49,4 +49,4 @@ async function readImage(
   await writeFile(outputPath, buf);
 }
 
-readImage("font2-abc-lowercase.png", "../fonts/abc2-lowercase.bin", 355, 8);
+readImage("font2-abc-lowercase.png", "../fonts/abc2-lowercase.bin", 361, 8);

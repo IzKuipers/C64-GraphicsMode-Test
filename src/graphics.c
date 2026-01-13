@@ -1,5 +1,6 @@
 #include <c64/vic.h>
 #include "fontrenderer.c"
+#include "util.c"
 
 void draw_hline(int x, int y, int len) {
     for (int i = x; i < x + len; i++) {
@@ -33,10 +34,17 @@ void draw_window(int x, int y, int w, int h, int p, int *content_bounds, const c
     int title_bounds[4];
     int body_bounds[4];
 
-    draw_box(x, y, w, h + 10, 0, window_bounds);
-    draw_box(x, y, w, 10, 1, title_bounds);
-    draw_box(x, y + 10, w, h, 1, body_bounds);
-    gfx_print_in(title,title_bounds);
+    int titlebar_height = 12;
+
+    draw_box(x, y, w, h, 0, window_bounds);
+    draw_box(x, y, w, titlebar_height, 2, title_bounds);
+    draw_box(x, y + titlebar_height, w, h - titlebar_height, p, body_bounds);
+    gfx_print_in(title, title_bounds);
+    gfx_print(x + w - 5 - 3, y + 3, "*");
+
+    int debug[] = { x, y, w, h, p, sizeof(content_bounds), strlen(title) };
+
+    debug_print(debug, 7);
     
     content_bounds[0] = body_bounds[0];
     content_bounds[1] = body_bounds[1];

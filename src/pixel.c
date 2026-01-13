@@ -2,7 +2,7 @@ const unsigned SCREEN_WIDTH = 320;
 const unsigned SCREEN_HEIGHT = 200;
 const unsigned SCREEN_WIDTH_ZB = 319;
 const unsigned SCREEN_HEIGHT_ZB = 199;
-int DEF_GFX_BOUNDS[4] = {0, 0, SCREEN_HEIGHT, SCREEN_WIDTH}; // top, left, bottom, right
+int DEF_GFX_BOUNDS[4] = {2, 2, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2}; // top, left, bottom, right
 char * const Hires	= (char *)0xe000;
 char * const Screen	= (char *)0xd000;
 
