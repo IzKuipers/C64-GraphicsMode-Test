@@ -5,6 +5,7 @@
 
 char * const Hires	= (char *)0xe000;
 char * const Screen	= (char *)0xd000;
+bool running = true;
 
 void set(int x, int y)
 {
@@ -50,13 +51,9 @@ int put_char(int idx, int x, int y) {
 
     for (int i=0;i<sizeof(FontData);i++) {
         char byte = FontData[start + i];
-
         if (byte == 0xFF) break;
 
-        width++;
-
         int bit = 0;
-
         while (bit < 8) {
             if (byte & 0x01) {
                 set(x+i, y + (8 - bit));
@@ -65,6 +62,8 @@ int put_char(int idx, int x, int y) {
             bit++;
             byte = byte >> 1;
         }
+
+        width++;
     }
 
     return width;
@@ -86,13 +85,13 @@ void gfx_print(int x, int y, const char* sequence) {
 }
 
 void draw_hline(int x, int y, int len) {
-    for (int i=x;i<x+len;i++) {
+    for (int i = x; i < x + len; i++) {
         set(i, y);
     }
 }
 
 void draw_vline(int x, int y, int len) {
-    for (int i=y; i<y+len;i++){
+    for (int i = y; i < y + len; i++){
         set(x, i);
     }
 }
@@ -107,14 +106,19 @@ int main(void)
 	vic_setmode(VICM_HIRES, Screen, Hires);
 	vic.color_border = VCOL_WHITE;
 
+    // Draw a border at the screen edge
     draw_hline(0, 0, 320);
     draw_hline(0, 199, 320);
     draw_vline(0, 0, 200);
     draw_vline(319, 0, 200);
     
+    // Print out the alphabet
     gfx_print(2, 2, "abcdefghijklmnopqrstuvwxyz");
 
-    for (;;){}
+    // Loop infinitely to prevent the program from stopping
+    while (running) {
+        //
+    }
 
 	return 0;
 }
