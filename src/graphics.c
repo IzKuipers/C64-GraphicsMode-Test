@@ -1,21 +1,5 @@
 #include <c64/vic.h>
-
-const unsigned SCREEN_WIDTH = 320;
-const unsigned SCREEN_HEIGHT = 200;
-const unsigned SCREEN_WIDTH_ZB = 319;
-const unsigned SCREEN_HEIGHT_ZB = 199;
-int DEF_GFX_BOUNDS[4] = {0, 0, SCREEN_HEIGHT, SCREEN_WIDTH}; // top, left, bottom, right
-char * const Hires	= (char *)0xe000;
-char * const Screen	= (char *)0xd000;
-
-void set(int x, int y)
-{
-	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT)
-	{
-		char* dp = Hires + 40 * 8 * (y >> 3) + (y & 7) + (x & ~7);
-		*dp |= 0x80 >> (x & 7);
-	}
-}
+#include "fontrenderer.c"
 
 void draw_hline(int x, int y, int len) {
     for (int i = x; i < x + len; i++) {
@@ -31,7 +15,7 @@ void draw_vline(int x, int y, int len) {
 
 void draw_box(int x, int y, int w, int h, int p, int *bounds) {
     draw_hline(x, y, w); // top
-    draw_hline(x, y + h, w); // bottom
+    draw_hline(x, y + h, w+1); // bottom
     draw_vline(x, x, h); // left
     draw_vline(x + w, x, h); // right
 
@@ -40,4 +24,22 @@ void draw_box(int x, int y, int w, int h, int p, int *bounds) {
     bounds[1] = x + p + 1; // left
     bounds[2] = h - p - 1; // bottom
     bounds[3] = (x + w) - p - 1; // right
+}
+
+void draw_window(int x, int y, int w, int h, int p, int *content_bounds, const char* title) {
+    // h + char height + title padding + bottom border
+    
+    int window_bounds[4];
+    int title_bounds[4];
+    int body_bounds[4];
+
+    draw_box(x, y, w, h + 10, 0, window_bounds);
+    draw_box(x, y, w, 10, 1, title_bounds);
+    draw_box(x, y + 10, w, h, 1, body_bounds);
+    gfx_print_in(title,title_bounds);
+    
+    content_bounds[0] = body_bounds[0];
+    content_bounds[1] = body_bounds[1];
+    content_bounds[2] = body_bounds[2];
+    content_bounds[3] = body_bounds[3];
 }

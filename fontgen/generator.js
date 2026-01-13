@@ -24,10 +24,23 @@ async function readImage(
       r.push(color[0] === 255 ? 0 : 1);
     }
 
-    if (r.length) {
+    if (r.length === 8) {
       const hexValue = Number(`0b${r.join("")}`);
       result.push(hexValue);
-      console.log(`Byte: 0x${hexValue.toString(16).toUpperCase()}`);
+      const strIdx = result.length.toString().padStart(3, "0");
+
+      if (hexValue === 255) {
+        console.log(`Byte ${strIdx}: ==== ======== =====`);
+      } else {
+        const strHex = `0x${hexValue
+          .toString(16)
+          .padStart(2, "0")
+          .toUpperCase()}`;
+        const strBin = hexValue.toString(2).padStart(8, "0");
+        const strDec = hexValue.toString().padStart(3, "0");
+
+        console.log(`Byte ${strIdx}: ${strHex} ${strBin} (${strDec})`);
+      }
     }
   }
 

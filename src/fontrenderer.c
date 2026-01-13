@@ -1,3 +1,5 @@
+#include "pixel.c"
+
 const unsigned TERMINATOR_BYTE = 0xFF;
 const unsigned MAX_CHAR_WIDTH = 5;
 const unsigned CHAR_HEIGHT = 8;

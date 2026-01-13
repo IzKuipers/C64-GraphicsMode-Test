@@ -3,7 +3,6 @@
 #include <math.h>
 #include <string.h>
 #include "graphics.c"
-#include "fontrenderer.c"
 #include "util.c"
 
 int main(void)
@@ -14,15 +13,14 @@ int main(void)
 	memset(Hires, 0x00, 8000);
 	mmap_set(MMAP_NO_ROM);
 	vic_setmode(VICM_HIRES, Screen, Hires);
-	vic.color_border = VCOL_BLACK;
-	vic.color_back = VCOL_BLACK;
+	vic.color_border = VCOL_DARK_GREY;
 
-    int siz[1] = { strlen(FontMap) };
-    debug_print(siz, 1);
+    int screen_bounds[4];
+    draw_box(0, 0, SCREEN_WIDTH_ZB, SCREEN_HEIGHT_ZB, 0, screen_bounds);
 
-    int bounds[4];
-    draw_box(30, 30, 140, 80, 5, bounds);
-    gfx_print_in("An error occurred, and the operation couldn't be completed.", bounds);
+    int body_bounds[4];
+    draw_window(30, 30, 140, 80, 5, body_bounds, "Error");
+    gfx_print_in("An error occurred, and the operation couldn't be completed.", body_bounds);
 
     // Loop infinitely to prevent the program from stopping
     for(;;) {}
