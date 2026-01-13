@@ -27,6 +27,7 @@ async function readImage(
     if (r.length) {
       const hexValue = Number(`0b${r.join("")}`);
       result.push(hexValue);
+      console.log(`Byte: 0x${hexValue.toString(16).toUpperCase()}`);
     }
   }
 
@@ -35,4 +36,4 @@ async function readImage(
   await writeFile(outputPath, buf);
 }
 
-readImage("font2-abc-lowercase.png", "../fonts/abc2-lowercase.bin", 127, 8);
+readImage("font2-abc-lowercase.png", "../fonts/abc2-lowercase.bin", 355, 8);

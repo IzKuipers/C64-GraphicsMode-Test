@@ -4,6 +4,7 @@
 #include <string.h>
 #include "graphics.c"
 #include "fontrenderer.c"
+#include "util.c"
 
 int main(void)
 {
@@ -13,16 +14,15 @@ int main(void)
 	memset(Hires, 0x00, 8000);
 	mmap_set(MMAP_NO_ROM);
 	vic_setmode(VICM_HIRES, Screen, Hires);
-	vic.color_border = VCOL_WHITE;
+	vic.color_border = VCOL_BLACK;
+	vic.color_back = VCOL_BLACK;
 
-    // Draw a border at the screen edge
-    draw_hline(0, 0, 320);
-    draw_hline(0, 199, 320);
-    draw_vline(0, 0, 200);
-    draw_vline(319, 0, 200);
-    
-    // Print out the alphabet
-    gfx_print(2, 2, "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ");
+    int siz[1] = { strlen(FontMap) };
+    debug_print(siz, 1);
+
+    int bounds[4];
+    draw_box(30, 30, 140, 80, 5, bounds);
+    gfx_print_in("An error occurred, and the operation couldn't be completed.", bounds);
 
     // Loop infinitely to prevent the program from stopping
     for(;;) {}
