@@ -1,4 +1,4 @@
-const char* FontMap = "abcdefghijklmnopqrstuvwxyz";
+const char* FontMap = "\xFFabcdefghijklmnopqrstuvwxyz";
 
 static const char FontData[] = {
 	#embed "./fonts/abc2-lowercase.bin"
@@ -56,19 +56,14 @@ int fontmap_idx(char c) {
         if (FontMap[i] == c)
             return i;
     }
-    return -1;
+    return 0;
 }
 
 void gfx_print(int x, int y, const char* sequence) {
     for (int i = 0; i < strlen(sequence); i++) {
         int idx = fontmap_idx(sequence[i]);
-
-        if (idx == -1) {
-            x += 1;
-            continue;
-        }
-
         int width = put_char(idx, x, y);
+        
         x += width + 1;
     }
 }

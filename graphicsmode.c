@@ -22,7 +22,7 @@ int main(void)
     draw_vline(319, 0, 200);
     
     // Print out the alphabet
-    gfx_print(2, 2, "abcdefghijklmnopqrstuvwxyz");
+    gfx_print(2, 2, "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ");
 
     // Loop infinitely to prevent the program from stopping
     for(;;) {}
