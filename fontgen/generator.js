@@ -21,7 +21,7 @@ async function readImage(
       /** @type {[number,number,number,number]} */
       const color = [...ctx.getImageData(x, y, 1, 1).data]; // [r, g, b, a]
 
-      r.push(color[0] === 255 ? 0 : 1);
+      r.push(color[0] === 255 ? 0 : 1); // bit is set if the pixel is NOT black
     }
 
     if (r.length === 8) {

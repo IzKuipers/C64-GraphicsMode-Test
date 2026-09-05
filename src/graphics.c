@@ -147,10 +147,10 @@ void draw_box(int x, int y, int w, int h, int p, int *bounds)
     draw_vline(x, y, h);
     draw_vline(x + w, y, h);
 
-    bounds[0] = y + p + 1;
-    bounds[1] = x + p + 1;
-    bounds[2] = h - p - 1;
-    bounds[3] = (x + w) - p - 1;
+    bounds[0] = y + p + 1; // ypos
+    bounds[1] = x + p + 1; // xpos
+    bounds[2] = (y + h) - p - 1; // ypos+h
+    bounds[3] = (x + w) - p - 1; // width
 }
 
 void draw_window(int x, int y, int w, int h, int p, int *content_bounds, const char *title)
